@@ -5,7 +5,7 @@
 <h1 align="center"> Consulta Sensor </h1>
 
 <p align="center" style="display: flex; flex-direction: row; align-content: center; justify-content: center; ">
-  <img width="460" height="300"  src="https://github.com/jadson179/sensor-presence/raw/develop/images/dashboard.png">
+  <img width="460" height="300"  src="https://github.com/jadson179/sensor-presence/blob/master/images/dashboard.png?raw=true">
 
 </p>
 
