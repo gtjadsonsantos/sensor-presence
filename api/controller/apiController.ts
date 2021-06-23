@@ -1,9 +1,9 @@
 // deno-lint-ignore-file
-import { listAll } from "../repository/sensor.ts";
+import { listAll, insert } from '../repository/sensor.ts';
 
 export const home = ({ response }: any) => {
   const res = {
-    "message": "Bem vindo à API para os sensores!",
+    message: 'Welcome to Sensor API',
   };
   response.status = 200;
   response.body = res;
@@ -11,17 +11,29 @@ export const home = ({ response }: any) => {
 
 export const pageNotFound = ({ response }: any) => {
   const res = {
-    "message": "Esta página não existe!",
+    message: 'This request does not exists.',
   };
   response.status = 404;
   response.body = res;
 };
 
-export const sensorList = async ({ response }: any) => {
-  const sensorList = await listAll();
+export const sensorList = async ({ response, request }: any) => {
+  const { sensor_name } = await request.body().value;
+  const sensorList = await listAll({ sensor_name });
   const res = {
-    "message": "Dados retornados com sucesso!",
-    "dados": sensorList,
+    message: 'Requisition sucessfull.',
+    data: sensorList,
+  };
+  response.status = 200;
+  response.body = res;
+};
+
+export const insertSensor = async ({ request, response }: any) => {
+  const { sensor_name } = await request.body().value;
+  const newSensor = await insert(sensor_name);
+  const res = {
+    message: 'Insert sucessfull',
+    data: newSensor,
   };
   response.status = 200;
   response.body = res;
