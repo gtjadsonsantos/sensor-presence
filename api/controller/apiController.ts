@@ -1,5 +1,5 @@
 // deno-lint-ignore-file
-import { insert, listAll } from "../repository/sensor.ts";
+import { insert, listAll, listAllSensor } from "../repository/sensor.ts";
 
 export const home = ({ response }: any) => {
   const res = {
@@ -19,7 +19,22 @@ export const pageNotFound = ({ response }: any) => {
 
 export const sensorList = async ({ response, params }: any) => {
   const sensor_name = await params.sensor_name;
-  const sensorList = await listAll({ sensor_name });
+  let sensorList;
+  if (sensor_name.trim() === "") {
+    sensorList = await listAllSensor();
+  } else {
+    sensorList = await listAll({ sensor_name });
+  }
+  const res = {
+    message: "Requisition sucessfull.",
+    data: sensorList,
+  };
+  response.status = 200;
+  response.body = res;
+};
+
+export const sensorListAll = async ({ response }: any) => {
+  const sensorList = await listAllSensor();
   const res = {
     message: "Requisition sucessfull.",
     data: sensorList,
@@ -35,7 +50,6 @@ export const insertSensor = async ({ request, response }: any) => {
     message: "Insert sucessfull",
     data: newSensor,
   };
-  response.setHeader("Access-Control-Allow-Origin", "*");
   response.status = 200;
   response.body = res;
 };

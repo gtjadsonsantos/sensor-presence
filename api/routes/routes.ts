@@ -4,6 +4,7 @@ import {
   insertSensor,
   pageNotFound,
   sensorList,
+  sensorListAll,
 } from "../controller/apiController.ts";
 
 const router = new Router();
@@ -12,6 +13,7 @@ router
   //WEB
   .get("/", home)
   //sensor
+  .get("/sensor", sensorListAll)
   .get("/sensor/:sensor_name", sensorList)
   .post("/sensor/insert", insertSensor)
   //404

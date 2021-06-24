@@ -5,7 +5,7 @@ filterForm.submit(function (e) {
   e.preventDefault();
   const sensor_name = $("input[name='sensorName']").val();
   $.ajax({
-    url: "http://127.0.0.1:8085/sensor/list?sensor_name=" + sensor_name,
+    url: "http://127.0.0.1:8085/sensor/" + sensor_name,
     crossDomain: true,
     async: true,
     type: "GET",
@@ -16,7 +16,18 @@ filterForm.submit(function (e) {
       console.log(error);
     },
     success: function (response) {
-      console.log(response);
+      const tbody = $("#tbody");
+      let html = ``;
+      $.each(response.data, function (key, value) {
+        html += `
+        <tr>
+          <td>${value.id}</td>
+          <td>${value.sensor_name}</td>
+          <td>${value.date}</td>
+        </tr>
+        `;
+      });
+      tbody.html(html);
     },
   });
 });
