@@ -17,14 +17,13 @@ export const pageNotFound = ({ response }: any) => {
   response.body = res;
 };
 
-export const sensorList = async ({ response, request }: any) => {
-  const { sensor_name } = await request.body().value;
+export const sensorList = async ({ response, params }: any) => {
+  const sensor_name = await params.sensor_name;
   const sensorList = await listAll({ sensor_name });
   const res = {
     message: "Requisition sucessfull.",
     data: sensorList,
   };
-  response.setHeader("Access-Control-Allow-Origin", "*");
   response.status = 200;
   response.body = res;
 };
