@@ -27,7 +27,7 @@ function updateScreen() {
         <tr>
           <td>${value.id}</td>
           <td>${value.sensor_name}</td>
-          <td>${value.date}</td>
+          <td>${value.dt}</td>
         </tr>
         `;
       });
@@ -58,7 +58,7 @@ filterForm.submit(function (e) {
         <tr>
           <td>${value.id}</td>
           <td>${value.sensor_name}</td>
-          <td>${value.date}</td>
+          <td>${value.dt}</td>
         </tr>
         `;
       });
