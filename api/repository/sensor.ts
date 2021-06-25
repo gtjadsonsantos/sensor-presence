@@ -7,7 +7,7 @@ interface SensorListParams {
 
 export async function listAllSensor() {
   try {
-    let query = "SELECT * FROM dados";
+    let query = "SELECT * FROM dados ORDER BY id DESC";
     return (await client.execute(query)).rows;
   } catch (error) {
     console.log(error);
@@ -20,6 +20,7 @@ export async function listAll(params: SensorListParams) {
 
     if (params.sensor_name !== null) {
       query += " WHERE sensor_name LIKE ?";
+      query += " ORDER BY id DESC";
       return (await client.execute(query, ["%" + params.sensor_name + "%"]))
         .rows;
     }
