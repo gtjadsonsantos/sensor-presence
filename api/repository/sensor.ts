@@ -7,7 +7,8 @@ interface SensorListParams {
 
 export async function listAllSensor() {
   try {
-    let query = "SELECT * FROM dados ORDER BY id DESC";
+    let query =
+      "SELECT *, DATE_FORMAT(date, '%d/%m/%Y %H:%i:%s') AS dt FROM dados ORDER BY id DESC";
     return (await client.execute(query)).rows;
   } catch (error) {
     console.log(error);
@@ -16,7 +17,8 @@ export async function listAllSensor() {
 
 export async function listAll(params: SensorListParams) {
   try {
-    let query = "SELECT * FROM dados";
+    let query =
+      "SELECT *, DATE_FORMAT(date, '%d/%m/%Y %H:%i:%s') AS dt FROM dados";
 
     if (params.sensor_name !== null) {
       query += " WHERE sensor_name LIKE ?";
