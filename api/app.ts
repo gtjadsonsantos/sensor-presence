@@ -16,5 +16,6 @@ app.use(
 );
 app.use(router.routes());
 
+addEventListener("fetch", app.fetchEventHandler());
 console.log(`Deno is running: ${HOST}:${PORT}`);
 await app.listen({ port: Number(PORT)});
