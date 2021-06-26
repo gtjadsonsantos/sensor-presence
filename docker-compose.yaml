@@ -5,9 +5,18 @@ services:
     image: denoland/deno:latest
     command: run --allow-all /app/app.ts
     volumes: 
-      - "$PWD/api:/app"
+      - "./api:/app"
     ports: 
       - 8085:8085
+
+  web:
+    image: nginx
+    volumes:
+     - ./web:/usr/share/nginx/html
+    network_mode: host
+    environment:
+      NGINX_HOST: foobar.com
+      NGINX_PORT: 80
 
   db:
     image: mysql:5.7
